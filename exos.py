@@ -22,7 +22,14 @@ def modulo(x,y):
 def salaireNet(salaireBrut, coefficient):
     return salaireBrut*coefficient
 
-def salaireParSeconde(SalaireHoraire, HeureParJourOuvre, NbJoursOuvreParAn):
+def calculSalParSec(salaireHoraire, heureParJO, jO):
+    # Je calcule le salaire annuel
+    salaireAnnuel = salaireHoraire * heureParJO * jO
+    # Je calcule le nombre de secondes dans une annee 
+    nbSecondeParAn = 365 * 24 * 60 * 60 
+    # Je divise mon salaire par le nombre de secondes
+    return salaireAnnuel / nbSecondeParAn
+    
 
 
 #SalaireParSeconde(
