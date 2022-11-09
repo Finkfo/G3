@@ -128,10 +128,18 @@ def findIndex(tableau, x):
     i=0
     #definir chaineRetour telle qu'une chaine de caractere vide
     chaineRetour = ''
+    #Je defini un boolen tel que firstTurn est True
+    firstTurn = True
     #tant qui i est different du nombre d'elt dans le tableau
     while (i != len(tableau)):
         #Alors j'attribue a une variable la valeur de tableau a l'index i
         selected = tableau[i]
+        #Si selected est egal à x  ET que firstTurn est True
+        if selected == x & firstTurn == True:
+            #Alors on assigne à chaineRetour le retour de str(i)
+            chaineRetour = str(i)
+            #changer la valeur de firstTurn à False
+            firstTurn = False
         #Si selected est egal à x 
         if selected == x:
             #Alors j'assigne le retour de concatWithComma tel que : concatWithComma(chaineRetour, i) à chaineRetour
