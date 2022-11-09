@@ -106,5 +106,54 @@ def maxigame(recherche, compteur=0):
     else:
         maxigame(recherche, compteur)
 
-maxigame("h")
+
+#Exercice 1
+#Faire une fonction qui concatene 2 chaine de caractere, les separant par une virgule
+def concatWithComma(chainA, chainB):
+    #Je m'assure que chainA soit bien de type str
+    stringifiedA = str(chainA)
+    stringifiedB = str(chainB)
+    #Retourne chainA + ', ' + chainB
+    return stringifiedA + ", " + stringifiedB
+
+#Excercice 2 
+#Faire une fonction qui itere sur tous les index d'un tableau renvoyant une chaine de caractere 
+#avec l'ensembles des occurences d'un chiffre e.g.:
+#Pour tableau = [0,1,1,1,0,1,1,0,1]
+#la fonction(tableau,0) doit renvoyer "0,4,7" n'hesitez pas a implementer la premiere fonction;
+tableau = [0,1,1,1,0,1,1,0,1]
+#Definir la fonction findIndex qui itere sur tableau, cherchant l'index des differentes occurences de x
+def findIndex(tableau, x):
+    #definir i un index de départ
+    i=0
+    #definir chaineRetour telle qu'une chaine de caractere vide
+    chaineRetour = ''
+    #tant qui i est different du nombre d'elt dans le tableau
+    while (i != len(tableau)):
+        #Alors j'attribue a une variable la valeur de tableau a l'index i
+        selected = tableau[i]
+        #Si selected est egal à x 
+        if selected == x:
+            #Alors j'assigne le retour de concatWithComma tel que : concatWithComma(chaineRetour, i) à chaineRetour
+            chaineRetour = concatWithComma(chaineRetour, i)
+        #j'incremente i de 1
+        i = i+1
+    #Retourne la chaine retour
+    return chaineRetour
+    
+    
+
+
+
+
+
+#Exercice 3 
+#Renvoyez / Afficher un message
+def printTxt(tonMsg):
+    return tonMsg
+
+
+print(concatWithComma(2, "de fou..."))
+print(printTxt("Je suis d'accord !"))
+
 #FIN
