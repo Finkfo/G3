@@ -59,7 +59,7 @@ def divide(x,y):
     if y==0:
         #Alors je retourne que la division par zero n'est pas possible
         print("ERROR : cannot divided by 0")
-        #retourner vide
+        #Retourner vide
         return
     #Sinon: y est different de 0
     else:
@@ -98,7 +98,7 @@ def maxigame(recherche, compteur=0):
     compteur = compteur + 1
     #importer les caractere aleatoire
     caractereGagnant = str(input())
-    #si cractere rechercher et cractere aleatoire sont pareil
+    #si caractere rechercher et cractere aleatoire sont pareil
     if recherche == caractereGagnant:
         #alors ecrire en combien d'etapes le robot la trouver
         print ("Ta lettre a etais trouvé en "+str(compteur)+ " étapes")
