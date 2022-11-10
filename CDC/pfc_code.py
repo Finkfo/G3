@@ -74,15 +74,17 @@ def pierreFeuilleCiseau(userName=None):
         ListeScore.append(str(scoreJ) +" : "+str(scoreIa))
     print(' ')
     print("La partie est finis !")
-    if scoreJ > scoreJ:
-        print("Vous avez gagné "+userName)
-    else:
-        print("L'IA à gagnée !")
     print(' ')
     print("Récapitulatif de la partie :")
     for i in range(len(ListeAction)):
         print(ListeScore[i])
         print(ListeAction[i])
+    if scoreJ > scoreIa:
+        print("Vous avez gagné "+userName)
+    else:
+        print("L'IA à gagnée !")
+    
+   
     
     restart = str(input("Voulez vous rejouer ? (oui , non) : "))
     if restart != "oui" and restart !="non":
