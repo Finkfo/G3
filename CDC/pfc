@@ -1,7 +1,6 @@
 #DEBUT
 
 #On admet que la fonction random existe et qu'elle retourne un nombre aleatoirement
-#importer la bibliotheque random
 
 #definir la fonction pierreFeuilleCiseau qui retourne si vous avez gagnez ou perdu contre l'IA par rapport a votre coup (joueurAction(string))
 
