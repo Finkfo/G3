@@ -29,17 +29,23 @@ class Game:
 
     # Affichage du tableau
     def show(self):
-        print("")
-        line = "  "
-        for x in range(self.size):
-            line += str(x+1)+" "
-        print(line)
-        for y in range(self.size):
-            line = str(y+1)+" "
-            for x in range(self.size):
-                line += self.table[x][y]+" "
-            print(line)
-        print("")
+        print("     0)  1)  2)")
+        print("   -------------")
+        print("0)", end='')
+        for i in range(3):
+            print(" | "+str(self.size[i]), end='')
+        print(" |")
+        print("   -------------")
+        print("1)", end='')
+        for i in range(3):
+            print(" | "+str(self.size[i+3]), end='')
+        print(" |")
+        print("   -------------")
+        print("2)", end='')
+        for i in range(3):
+            print(" | "+str(self.size[i+6]), end='')
+        print(" |")
+        print("   -------------")
 
     # Change la valeur d'une case si libre
     def play(self, x, y, player):
