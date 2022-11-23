@@ -20,7 +20,7 @@ class Computer(Player):
         for x in range(size):
             for y in range(size):
                 # Si la case est disponible
-                if table[x][y] == " ":
+                if table[x][y] == "*":
                     # On fait une copie du tableau dans laquelle on joue
                     copy = deepcopy(table)
                     copy[x][y] = sign

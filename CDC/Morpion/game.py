@@ -1,9 +1,10 @@
+
 class Game:
 
     # Initialisation du tableau de jeu
-    def __init__(self, size, player1, player2):
-        self.size = size
-        self.table = [["*" for x in range(size)] for y in range(size)]
+    def __init__(self, grille, player1, player2):
+        self.grille = grille
+        self.grille = [[" " for x in range(3)] for y in range(3)]
         self.player1 = player1
         self.player2 = player2
 
@@ -27,25 +28,25 @@ class Game:
         print(" |")
         print("   -------------")
 
-    def start(grille, joueur):
+    def start(grille, joueur, afficher_grille):
         print("C'est le tour du joueur "+str(joueur))
 
-        print("Vous avez joué la case ("+colonne+","+ligne+")")
-        #tant que les coordonner (colonne + ligne * 3) n'est pas vide alors on rentre dans la boucle
-        while grille[int(colonne)+int(ligne)*3]!=" ":
+        print("Vous avez joué la case ("+str(colonne)+","+str(ligne)+")")
+        # tant que les coordonner (colonne + ligne * 3) n'est pas vide alors on rentre dans la boucle
+        while grille[colonne+ligne*3] != " ":
             afficher_grille(grille)
             print("Cette case est deja jouée ! Saisissez une autre case svp !")
 
             print("Vous avez joué la case ("+colonne+","+ligne+")")
-        #ici cela permets au joueurs de bien jouer leur symbole associer
-        if joueur==1 :
-            grille[int(colonne)+int(ligne)*3]="X"
-        if joueur==2 :
-            grille[int(colonne)+int(ligne)*3]="O"
+        # ici cela permets au joueurs de bien jouer leur symbole associer
+        if joueur == 1:
+            grille[int(colonne)+int(ligne)*3] = "X"
+        if joueur == 2:
+            grille[int(colonne)+int(ligne)*3] = "O"
         afficher_grille(grille)
 
-    
-    #Regarde si un joueur a gagne le match
+    # Regarde si un joueur a gagne le match
+
     def win(grille):
         if (grille[0] == grille[1]) and (grille[0] == grille[2]) and (grille[0] != " "):
             return 1
@@ -64,9 +65,9 @@ class Game:
         if (grille[2] == grille[4]) and (grille[2] == grille[6]) and (grille[2] != " "):
             return 1
 
-    #Regarde si le match est nul
+    # Regarde si le match est nul
     def est_match_nul(grille):
         for i in range(9):
-            if grille[i]==" ":
+            if grille[i] == " ":
                 return 0
         return 1

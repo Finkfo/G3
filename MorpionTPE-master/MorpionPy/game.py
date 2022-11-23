@@ -4,7 +4,7 @@ class Game:
     # Initialisation du tableau de jeu
     def __init__(self, size, player1, player2):
         self.size = size
-        self.table = [["*" for x in range(size)] for y in range(size)]
+        self.table = [[" " for x in range(size)] for y in range(size)]
         self.player1 = player1
         self.player2 = player2
 
@@ -29,27 +29,23 @@ class Game:
 
     # Affichage du tableau
     def show(self):
-        print("     0)  1)  2)")
-        print("   -------------")
-        print("0)", end='')
-        for i in range(3):
-            print(" | "+str(self.size[i]), end='')
-        print(" |")
-        print("   -------------")
-        print("1)", end='')
-        for i in range(3):
-            print(" | "+str(self.size[i+3]), end='')
-        print(" |")
-        print("   -------------")
-        print("2)", end='')
-        for i in range(3):
-            print(" | "+str(self.size[i+6]), end='')
-        print(" |")
-        print("   -------------")
+        print("")
+        line = "    "
+        for x in range(self.size):
+            line += str(x+1)+"   "
+        print(line)
+        print("  -------------")
+        for y in range(self.size):
+            line = str(y+1)+" | "
+            for x in range(self.size):
+                line += self.table[x][y]+" | "
+            print(line)
+            print("  -------------")
+        print("")
 
     # Change la valeur d'une case si libre
     def play(self, x, y, player):
-        if x >= 0 and x < self.size and y >= 0 and y < self.size and self.table[x][y] == "*":
+        if x >= 0 and x < self.size and y >= 0 and y < self.size and self.table[x][y] == " ":
             self.table[x][y] = player
             return True
         return False
@@ -58,14 +54,14 @@ class Game:
     def win(self, table):
         for i in range(self.size):
             line = self.line(table, i)
-            if line != "*":
+            if line != " ":
                 return line
             col = self.col(table, i)
-            if col != "*":
+            if col != " ":
                 return col
         for i in range(2):
             dia = self.dia(table, i)
-            if dia != "*":
+            if dia != " ":
                 return dia
         return "*"
 
@@ -103,10 +99,10 @@ class Game:
         if changed:
             return "*"
         return player
-
+    #Verifie les match nul
     def full(self, table):
         for x in range(self.size):
             for y in range(self.size):
-                if table[x][y] == "*":
+                if table[x][y] == " ":
                     return False
         return True

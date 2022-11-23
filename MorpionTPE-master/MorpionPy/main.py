@@ -1,9 +1,9 @@
-#!/usr/local/bin/python3
+#!/usr/local/bin/python
 
 # Jeu du morpion
 # Le joueur commence a jouer en premier, l'ordinateur joue ensuite
 
-# Import des bibliotheques necessaires au programme
+# Import des bibliotheques necessaires au program2me
 from game import *
 from player import *
 from human import *
