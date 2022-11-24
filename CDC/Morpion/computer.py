@@ -20,7 +20,7 @@ class Computer(Player):
         for x in range(size):
             for y in range(size):
                 # Si la case est disponible
-                if table[x][y] == "*":
+                if table[x][y] == " ":
                     # On fait une copie du tableau dans laquelle on joue
                     copy = deepcopy(table)
                     copy[x][y] = sign
@@ -42,7 +42,7 @@ class Computer(Player):
                     # Si le score est 1, on joue ce coup
                     if score == 1:
                         return result
-                    # Sinon on l'ajout dans la liste avec les autres et on continue
+                    # Sinon on l'ajoute dans la liste avec les autres et on continue
                     moves.append(result)
 
         # Une fois tous les coups dans la liste, on les trie par score

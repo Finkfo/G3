@@ -3,7 +3,8 @@ from player import *
 
 # Class Human - Implementation de Player pour le joueur
 class Human(Player):
-    def play(self):
-        colonne=int(input("Entrez le numero de la colonne : "))
-        ligne=int(input("Entrez le numero de la ligne : "))
-        return (colonne, ligne)
+
+    def play(self, game):
+        y = int(input("Entrer le numero de la ligne (1 a "+str(game.size)+") : "))
+        x = int(input("Entrer le numero de la colonne (1 a "+str(game.size)+") : "))
+        return (x-1, y-1)

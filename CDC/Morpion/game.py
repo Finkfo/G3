@@ -1,73 +1,109 @@
-
+# Class Game - Gestion du tableau de jeu
 class Game:
 
     # Initialisation du tableau de jeu
-    def __init__(self, grille, player1, player2):
-        self.grille = grille
-        self.grille = [[" " for x in range(3)] for y in range(3)]
+    def __init__(self, size, player1, player2):
+        self.size = size
+        self.table = [[" " for x in range(size)] for y in range(size)]
         self.player1 = player1
         self.player2 = player2
 
-    # Affichage du tableau de jeu
-    def afficher_grille(grille):
-        print("     0)  1)  2)")
-        print("   -------------")
-        print("0)", end='')
-        for i in range(3):
-            print(" | "+str(grille[i]), end='')
-        print(" |")
-        print("   -------------")
-        print("1)", end='')
-        for i in range(3):
-            print(" | "+str(grille[i+3]), end='')
-        print(" |")
-        print("   -------------")
-        print("2)", end='')
-        for i in range(3):
-            print(" | "+str(grille[i+6]), end='')
-        print(" |")
-        print("   -------------")
+    # Deroulement de la partie
+    def start(self):
+        win = "*"
+        while win == "*" and not self.full(self.table):
+            for player in [self.player1, self.player2]:
+                if not self.full(self.table) and win == "*":
+                    self.show()
+                    print("Au tour de "+player.sign+" de jouer !")
+                    x = y = -1
+                    while not self.play(x, y, player.sign):
+                        (x, y) = player.play(self)
+                    print(player.sign+" joue ligne "+str(y+1)+", colonne "+str(x+1))
+                    win = self.win(self.table)
+        self.show()
+        if win == "*":
+            print("Match nul !")
+            return
+        print(win+" remporte la partie !")
+        
 
-    def start(grille, joueur, afficher_grille):
-        print("C'est le tour du joueur "+str(joueur))
+    # Affichage du tableau
+    def show(self):
+        print("")
+        line = "    "
+        for x in range(self.size):
+            line += str(x+1)+"   "
+        print(line)
+        print("  -------------")
+        for y in range(self.size):
+            line = str(y+1)+" | "
+            for x in range(self.size):
+                line += self.table[x][y]+" | "
+            print(line)
+            print("  -------------")
+        print("")
 
-        print("Vous avez joué la case ("+str(colonne)+","+str(ligne)+")")
-        # tant que les coordonner (colonne + ligne * 3) n'est pas vide alors on rentre dans la boucle
-        while grille[colonne+ligne*3] != " ":
-            afficher_grille(grille)
-            print("Cette case est deja jouée ! Saisissez une autre case svp !")
+    # Change la valeur d'une case si libre
+    def play(self, x, y, player):
+        if x >= 0 and x < self.size and y >= 0 and y < self.size and self.table[x][y] == " ":
+            self.table[x][y] = player
+            return True
+        return False
 
-            print("Vous avez joué la case ("+colonne+","+ligne+")")
-        # ici cela permets au joueurs de bien jouer leur symbole associer
-        if joueur == 1:
-            grille[int(colonne)+int(ligne)*3] = "X"
-        if joueur == 2:
-            grille[int(colonne)+int(ligne)*3] = "O"
-        afficher_grille(grille)
+    # Regarde si un joueur a gagne
+    def win(self, table):
+        for i in range(self.size):
+            line = self.line(table, i)
+            if line != " ":
+                return line
+            col = self.col(table, i)
+            if col != " ":
+                return col
+        for i in range(2):
+            dia = self.dia(table, i)
+            if dia != " ":
+                return dia
+        return "*"
 
-    # Regarde si un joueur a gagne le match
+    # Verifie une ligne
+    def line(self, table, y):
+        player = table[0][y]
+        changed = False
+        for x in range(self.size):
+            if table[x][y] != player:
+                changed = True
+        if changed:
+            return " "
+        return player
 
-    def win(grille):
-        if (grille[0] == grille[1]) and (grille[0] == grille[2]) and (grille[0] != " "):
-            return 1
-        if (grille[3] == grille[4]) and (grille[3] == grille[5]) and (grille[3] != " "):
-            return 1
-        if (grille[6] == grille[7]) and (grille[6] == grille[8]) and (grille[6] != " "):
-            return 1
-        if (grille[0] == grille[3]) and (grille[0] == grille[6]) and (grille[0] != " "):
-            return 1
-        if (grille[1] == grille[4]) and (grille[1] == grille[7]) and (grille[1] != " "):
-            return 1
-        if (grille[2] == grille[5]) and (grille[2] == grille[8]) and (grille[2] != " "):
-            return 1
-        if (grille[0] == grille[4]) and (grille[0] == grille[8]) and (grille[0] != " "):
-            return 1
-        if (grille[2] == grille[4]) and (grille[2] == grille[6]) and (grille[2] != " "):
-            return 1
+    # Verifie une colonne
+    def col(self, table, x):
+        player = table[x][0]
+        changed = False
+        for y in range(self.size):
+            if table[x][y] != player:
+                changed = True
+        if changed:
+            return " "
+        return player
 
-    # Regarde si le match est nul
-    def est_match_nul(grille):
-        for i in range(9):
-            if grille[i] == " ":
-                return 0
-        return 1
+    # Verifie une diagonale
+    def dia(self, table, d):
+        i = (0 if d == 0 else self.size-1)
+        player = table[i][0]
+        changed = False
+        for x in range(self.size):
+            i = (x if d == 0 else self.size-1-x)
+            if table[i][x] != player:
+                changed = True
+        if changed:
+            return " "
+        return player
+    #Verifie les match nul
+    def full(self, table):
+        for x in range(self.size):
+            for y in range(self.size):
+                if table[x][y] == " ":
+                    return False
+        return True
